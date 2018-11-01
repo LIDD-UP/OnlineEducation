@@ -1,0 +1,19 @@
+首先是mysql驱动的安装：
+直接输入：
+pip install pymysql 即可
+注意这里django1.0和2.0，以及python2和python3不同，需要在
+项目全局app下的__init__.py文件下写入:
+import pymysql
+pymysql.install_as_MySQLdb()这是后再在setting文件夹下配置database即可；需要改为mysql；
+
+任何一个web项目，user都是首先被设计的；
+
+
+
+django.db.migrations.exceptions.InconsistentMigrationHistory: Migration admin.0001_initial is applied before its dependency users.0001_initial on database 'default'
+
+解决方案：
+
+删除数据库中 除了auth_user的其他表，然后重新来一次
+
+大概原因是因为admin的模型依赖了之前默认的user模型吧

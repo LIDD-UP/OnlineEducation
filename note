@@ -1,0 +1,55 @@
+注意到django提供了默认的user表，但是并不满足我们的需求；
+
+
+user的自定方法：官方文档有说明；
+django的数据字段类型：
+
+
+class meta的作用：
+Meta里可以指定一下表名  所属app 抽象 联合索引 自定义权限什么的
+
+把users下的userprofile设置好了之后需要在setting里面设置一下：
+AUTH_USER_MODEL = 'users.UserProfile'
+
+
+注意更改了model的时候需要makemigrations 然后migrage
+有image需要有pillow这个库；
+
+扩展user 达到user表的自定义
+
+
+up_to 的用法和意义：
+For example,
+say your MEDIA_ROOT is set to '/home/media',
+and upload_to is set to 'photos/%Y/%m/%d'.
+The '%Y/%m/%d' part of upload_to is strftime()
+formatting; '%Y' is the four-digit year, '%m'
+is the two-digit month and '%d' is the two-digit
+day. If you upload a file on Jan. 15, 2007,
+it will be saved in the directory
+/home/media/photos/2007/01/15.
+
+完善user
+在循环引用的时候会出错的；
+每个
+
+usercourse : user,course
+coursecomment user,course
+这个就导致了循环引用，会出错；
+那么该怎么做呢；
+
+如何解决循环的问题；
+    就是分层设计
+
+目前的app
+users
+courses
+organization
+
+这时候设置一个新的app，新的一层operation 来解决循环引用的问题；
+
+邮箱注册和验证码；
+验证时和user和贴近的功能；
+PageBanner也是比较独立的功能；
+
+
